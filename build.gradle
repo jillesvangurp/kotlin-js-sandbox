@@ -46,20 +46,10 @@ kotlinFrontend {
         mode = 'production'
     }
 
+    // not sure what these do
     define "PRODUCTION", false
     define "X", false
 
-//    rollupBundle {
-//        bundleName = "rolledUp"
-//    }
-
-//    allBundles {
-//        /* set properties for all bundles */
-//    }
-
-//    bundle("someBundler") {
-//        ....
-//    }
 }
 
 compileKotlin2Js {
