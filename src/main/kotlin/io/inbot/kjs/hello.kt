@@ -1,39 +1,29 @@
-import org.w3c.dom.HTMLElement
+import io.inbot.kjs.redom.ReDom.Companion.el
+import io.inbot.kjs.redom.ReDom.Companion.setChildren
+import io.inbot.kjs.redom.ReDom.Companion.text
+import io.inbot.kjs.redom.listItem
+import io.inbot.kjs.redom.para
+import io.inbot.kjs.redom.unorderedList
 import kotlin.browser.document
+import kotlin.js.json
 
 @JsModule("is-positive")
 external fun isPositive(number: Int): Boolean
 
-//@JsModule("redom")
-//@JsNonModule
-//external fun el(tagName: String, argument: Array<Any>): HTMLElement
-
-@JsModule("redom")
-external class ReDom {
-    companion object {
-        fun el(query: String, vararg args: Any): HTMLElement
-        fun text(str: String): HTMLElement
-    }
-
-}
-
-
 fun main(vararg args: String) {
     val body = document.body
+        ?: throw IllegalStateException("no body in dom tree, load script inside the body tag and not in the head.")
 
-    if (body != null) {
-        val element = document.createElement("div")
-        element.textContent = "Is it positive? -1:${isPositive(-1)} or 1:${isPositive(1)}?"
-        body.appendChild(element)
-        body.appendChild(ReDom.el(".foo",ReDom.text("foo")))
 
-//        val node = text("yes")
-//        element.appendChild(node)
-//        body.appendChild(text("i can has redom"))
-    } else {
-        println("wtf")
-    }
-    println("after")
+    setChildren(body, para(text("bar")),
+        unorderedList(
+            listItem(el("b", "foo")),
+            listItem(el("a", json("href" to "http://inbot.io"), "I can has links too"))
+        )
+
+    )
+
+    println("a console message should appear")
 
 
 }
