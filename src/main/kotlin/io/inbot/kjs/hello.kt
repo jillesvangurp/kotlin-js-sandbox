@@ -7,9 +7,6 @@ import io.inbot.kjs.redom.unorderedList
 import kotlin.browser.document
 import kotlin.js.json
 
-@JsModule("is-positive")
-external fun isPositive(number: Int): Boolean
-
 fun main(vararg args: String) {
     val body = document.body
         ?: throw IllegalStateException("no body in dom tree, load script inside the body tag and not in the head.")
