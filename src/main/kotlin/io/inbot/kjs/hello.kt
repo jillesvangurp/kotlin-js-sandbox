@@ -1,24 +1,39 @@
+import org.w3c.dom.HTMLElement
 import kotlin.browser.document
 
-fun main(vararg args: String) {
-    println("hello world. It is me!")
+@JsModule("is-positive")
+external fun isPositive(number: Int): Boolean
 
-    println(document.all.length)
-    repeat(document.all.length) {
-        val e = document.all.item(it.toString())
-        println(JSON.stringify(e))
-        println(e)
+//@JsModule("redom")
+//@JsNonModule
+//external fun el(tagName: String, argument: Array<Any>): HTMLElement
+
+@JsModule("redom")
+external class ReDom {
+    companion object {
+        fun el(query: String, vararg args: Any): HTMLElement
+        fun text(str: String): HTMLElement
     }
+
+}
+
+
+fun main(vararg args: String) {
     val body = document.body
 
-
-//    val body = document.getElementById("root")
     if (body != null) {
         val element = document.createElement("div")
-        element.textContent = "Hello World"
+        element.textContent = "Is it positive? -1:${isPositive(-1)} or 1:${isPositive(1)}?"
         body.appendChild(element)
+        body.appendChild(ReDom.el(".foo",ReDom.text("foo")))
+
+//        val node = text("yes")
+//        element.appendChild(node)
+//        body.appendChild(text("i can has redom"))
     } else {
         println("wtf")
     }
     println("after")
+
+
 }

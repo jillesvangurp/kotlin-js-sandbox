@@ -32,9 +32,10 @@ kotlinFrontend {
     downloadNodeJsVersion = "latest"
 
     npm {
-//        dependency("kotlin", "1.1.0")
+        dependency("kotlin", "1.3.10")
         dependency "style-loader"
         dependency "redom"
+        dependency "is-positive"
         devDependency("karma")
     }
 
